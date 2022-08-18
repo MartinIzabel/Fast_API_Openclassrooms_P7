@@ -38,7 +38,7 @@ def predict_bool_model():
 
 @app.get('/lists_feat')
 def predict_bool_model():
-    return model;
+    return model
 
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.01', port=8000)
