@@ -17,20 +17,24 @@ model = joblib.load("model_vf.pkl")
 features = list(app_test.columns)
 
 # #Preparation des predictions
-seuil = 0.7539816036060938
-X_test = preprocessing.StandardScaler().fit_transform(app_test)
-app_test['prediction'] = (model.predict_proba(X_test)[:,1])
-app_test_bool = app_test
-app_test_bool['prediction_label'] =  (model.predict_proba(X_test)[:,1] > seuil).astype(bool)
+# seuil = 0.7539816036060938
+# X_test = preprocessing.StandardScaler().fit_transform(app_test)
+# app_test['prediction'] = (model.predict_proba(X_test)[:,1])
+# app_test_bool = app_test
+# app_test_bool['prediction_label'] =  (model.predict_proba(X_test)[:,1] > seuil).astype(bool)
 
 @app.get("/")
 def hello_world():
     return {"hello" : "world"} 
 
-@app.get('/prediction/')
+@app.post('/prediction/')
 def predict_model():
-    return {"10001":app_test['prediction'].loc['10001']}
+    return model
 
-@app.get('/prediction_bool/')
+@app.post('/prediction_bool/')
 def predict_bool_model():
-    return {"10001":app_test_bool['prediction_label'].loc['10001']}
+    return {"10001":"1", "100002":"2"}
+
+@app.post('/lists_feat/')
+def predict_bool_model():
+    return features
