@@ -1,5 +1,5 @@
 # Library imports
-import uvicorn
+# import uvicorn
 from fastapi import FastAPI
 import numpy as np 
 # import pickle
