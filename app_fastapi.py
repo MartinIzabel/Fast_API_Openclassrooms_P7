@@ -1,22 +1,30 @@
 # Library imports
+from array import array
+import pandas as pd
+import numpy as np
 from fastapi import FastAPI
 import joblib
-import pandas as pd
 from sklearn import preprocessing 
 import uvicorn
+from pydantic import BaseModel
 
 #Create the app object
 app = FastAPI()
 
-#Load the data
-app_test = pd.read_csv('app_test.csv', sep = ",",  index_col='SK_ID_CURR')
-X_test = preprocessing.StandardScaler().fit_transform(app_test)
-
-# # Load the model
+# Load the model
 model = joblib.load("model_vf.pkl")
+seuil = 0.7539816036060938
 
-# #Preparation des predictions
-# seuil = 0.7539816036060938
+def get_prediction(param):
+    
+    x = param
+
+    y = model.predict(x)[0]  # just get single value
+    prob = model.predict_proba(x)[0].tolist()  # send to list for return
+
+    return {'prediction': int(y), 'probability': prob}
+
+
 # app_test['prediction'] = (model.predict_proba(X_test)[:,1])
 # app_test_bool = app_test
 # app_test_bool['prediction_label'] =  (model.predict_proba(X_test)[:,1] > seuil).astype(bool)
@@ -27,16 +35,22 @@ def hello_world():
 
 @app.get('/prediction/{id}')
 def predict_model(id):
-    print(app_test[0])
-    return {"id": id}
+    return {seuil: id}
 
-@app.get('/client_data/{id}')
-def get_data(id):
-    return {app_test.loc[id]}
+# define model for post request.
+class ModelParams(BaseModel):
+    params: array
 
-@app.get('/lists_feat')
-def df_print():
-    return {app_test[0]}
+@app.post("/predict")
+def predict(params: ModelParams):
 
+    pred = get_prediction(params.params)
+
+    return pred
+
+
+
+
+#################################################################################
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.01', port=8000)
