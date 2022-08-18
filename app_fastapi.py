@@ -1,7 +1,8 @@
 # Library imports
 from fastapi import FastAPI
 import joblib
-import pandas as pd 
+import pandas as pd
+from sklearn import preprocessing 
 
 #Create the app object
 app = FastAPI()
