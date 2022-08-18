@@ -38,13 +38,13 @@ def predict_model(id):
     return {seuil: id}
 
 # define model for post request.
-class ModelParams(BaseModel):
-    params: float
+# class ModelParams(BaseModel):
+#     params: float
 
 @app.post("/predict")
-def predict(params: ModelParams):
+def predict(params):
 
-    pred = get_prediction(params.params)
+    pred = get_prediction(params)
 
     return pred
 
