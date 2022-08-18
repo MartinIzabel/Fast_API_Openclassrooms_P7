@@ -8,7 +8,7 @@ from sklearn import preprocessing
 app = FastAPI()
 
 #Load the data
-app_test = pd.read_csv('app_test.csv', sep = ",",  index_col='SK_ID_CURR')
+# app_test = pd.read_csv('app_test.csv', sep = ",",  index_col='SK_ID_CURR')
 
 # # Load the model
 model = joblib.load("model_vf.pkl")
@@ -27,14 +27,14 @@ features = list(app_test.columns)
 def hello_world():
     return {"hello" : "world"} 
 
-@app.post('/prediction/')
-def predict_model():
-    return model
+@app.get('/prediction/{id}')
+def predict_model(id):
+    return {"id": id}
 
-@app.post('/prediction_bool/')
+@app.get('/prediction_bool')
 def predict_bool_model():
     return {"10001":"1", "100002":"2"}
 
-@app.post('/lists_feat/')
+@app.get('/lists_feat/')
 def predict_bool_model():
-    return features
+    return model;
