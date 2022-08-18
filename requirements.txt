@@ -4,5 +4,5 @@ fastapi
 joblib
 matplotlib
 lightgbm
-uvicorn
+gunicorn
 
