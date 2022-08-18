@@ -17,7 +17,7 @@ seuil = 0.7539816036060938
 
 def get_prediction(param):
     
-    x = [[param1, param2]]
+    x = [[param1]]
 
     y = model.predict(x)[0]  # just get single value
     prob = model.predict_proba(x)[0].tolist()  # send to list for return
@@ -35,13 +35,13 @@ def hello_world():
 
 # define model for post request.
 class ModelParams(BaseModel):
-    param1: float
-    param2: float
+    param1: dict
+    # param2: float
 
 @app.post("/predict")
 def predict(params: ModelParams):
 
-    pred = get_prediction(params.param1, params.param2)
+    pred = get_prediction(params.param1)
 
     return pred
 
