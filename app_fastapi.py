@@ -19,14 +19,18 @@ features = list(app_test.columns)
 # #Preparation des predictions
 seuil = 0.7539816036060938
 X_test = preprocessing.StandardScaler().fit_transform(app_test)
-app_test['prediction'] = (model.predict_proba(X_test)[:,1])
+prediction = (model.predict_proba(X_test)[:,1])
 app_test_bool = app_test
-app_test_bool['prediction_label'] =  (model.predict_proba(X_test)[:,1] > seuil).astype(bool)
+prediction_bool =  (model.predict_proba(X_test)[:,1] > seuil).astype(bool)
 
 @app.get("/")
 def hello_world():
     return {"hello" : "world"} 
 
-@app.post('/predict/{client_id}')
-def predict_model(client_id):
-    return app_test['prediction'].loc[client_id]
+@app.get('/prediction/')
+def predict_model():
+    return prediction
+
+@app.get('/prediction_bool/')
+def predict_bool_model():
+    return prediction_bool
