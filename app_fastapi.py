@@ -27,6 +27,7 @@ def hello_world():
 
 @app.get('/prediction/{id}')
 def predict_model(id):
+    print(app_test[0])
     return {"id": id}
 
 @app.get('/client_data/{id}')
@@ -35,7 +36,7 @@ def get_data(id):
 
 @app.get('/lists_feat')
 def df_print():
-    return app_test[0]
+    return {app_test[0]}
 
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.01', port=8000)
