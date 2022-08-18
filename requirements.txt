@@ -4,3 +4,4 @@ joblib==0.14.1
 lightgbm==3.3.2
 pandas==1.0.5
 uvicorn==0.16.0
+numpy
