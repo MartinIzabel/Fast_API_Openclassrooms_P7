@@ -36,7 +36,7 @@ def predict_model(id):
 def predict_bool_model():
     return {"10001":"1", "100002":"2"}
 
-@app.get('/lists_feat/')
+@app.get('/lists_feat')
 def predict_bool_model():
     return model;
 
