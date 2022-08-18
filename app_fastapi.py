@@ -39,7 +39,7 @@ def predict_model(id):
 
 # define model for post request.
 class ModelParams(BaseModel):
-    params: array
+    params: float
 
 @app.post("/predict")
 def predict(params: ModelParams):
