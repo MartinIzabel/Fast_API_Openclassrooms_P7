@@ -1,13 +1,9 @@
 numpy
 pandas
-requests
-scikit-learn
+fastapi
+pickle
 joblib
-streamlit
 matplotlib
 lightgbm
-plotly
-seaborn
-lime
-gunicorn
+uvicorn
 
