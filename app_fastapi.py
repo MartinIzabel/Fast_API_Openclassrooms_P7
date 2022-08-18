@@ -29,8 +29,8 @@ def hello_world():
 
 @app.get('/prediction/')
 def predict_model():
-    return prediction
+    return {prediction}
 
 @app.get('/prediction_bool/')
 def predict_bool_model():
-    return prediction_bool
+    return {prediction_bool}
