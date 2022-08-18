@@ -1,7 +1,7 @@
 # Library imports
 # import uvicorn
 from fastapi import FastAPI
-# import numpy as np 
+import numpy as np 
 # import pickle
 import joblib
 import pandas as pd 
