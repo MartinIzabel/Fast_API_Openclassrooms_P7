@@ -3,6 +3,7 @@ from fastapi import FastAPI
 import joblib
 import pandas as pd
 from sklearn import preprocessing 
+import uvicorn
 
 #Create the app object
 app = FastAPI()
@@ -14,7 +15,7 @@ app = FastAPI()
 model = joblib.load("model_vf.pkl")
 
 # #listes des features
-features = list(app_test.columns)
+# features = list(app_test.columns)
 
 # #Preparation des predictions
 # seuil = 0.7539816036060938
@@ -38,3 +39,6 @@ def predict_bool_model():
 @app.get('/lists_feat/')
 def predict_bool_model():
     return model;
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='127.0.01', port=8000)
