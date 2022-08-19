@@ -33,13 +33,13 @@ def hello_world():
 
 # define model for post request.
 class ModelParams(BaseModel):
-    param1: dict
-    # param2: float
+    data: dict
+
 
 @app.post("/predict")
-def predict(params: ModelParams):
+def predict(params: BaseModel):
 
-    pred = get_prediction(params.param1)
+    pred = get_prediction(params.data)
 
     return pred
 
