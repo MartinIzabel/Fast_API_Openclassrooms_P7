@@ -32,7 +32,7 @@ def hello_world():
 
 # define model for post request.
 class ModelParams(BaseModel):
-    data: dict
+    data: array
 
 @app.post("/predict")
 def predict(params: ModelParams):
