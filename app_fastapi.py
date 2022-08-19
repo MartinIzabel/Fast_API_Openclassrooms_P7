@@ -19,7 +19,7 @@ features = ['NAME_CONTRACT_TYPE', 'FLAG_OWN_CAR', 'FLAG_OWN_REALTY', 'CNT_CHILDR
 
 def get_prediction(dict):
     
-    x = dict.values()
+    x = np.array(list(dict.values()))
 
     y = model.predict(x)[0]  # just get single value
     prob = model.predict_proba(x)[0].tolist()  # send to list for return
