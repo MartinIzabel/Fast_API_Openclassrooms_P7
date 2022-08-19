@@ -36,21 +36,8 @@ class ModelParams(BaseModel):
 
 @app.post("/predict")
 def predict(params: ModelParams):
-    data = params.data
-    pred = get_prediction(data)
 
-    return pred
-
-
-#Load the data
-app_test = pd.read_csv('app_test.csv', sep = ",",  index_col='SK_ID_CURR')
-X_test = preprocessing.StandardScaler().fit_transform(app_test)
-
-@app.get("/scores")
-def get_scoret(X_test):
-    scores = model.predict(X_test)
-    return scores
-
+    return params
 
 
 #################################################################################
