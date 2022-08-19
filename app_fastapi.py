@@ -41,6 +41,18 @@ def predict(params: ModelParams):
 
     return pred
 
+
+#Load the data
+app_test = pd.read_csv('app_test.csv', sep = ",",  index_col='SK_ID_CURR')
+X_test = preprocessing.StandardScaler().fit_transform(app_test)
+
+@app.post("/scores")
+def get_scoret(X_test):
+    scores = model.predict(X_test)
+    return scores
+
+
+
 #################################################################################
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.01', port=8000)
