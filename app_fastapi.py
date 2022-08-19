@@ -26,7 +26,6 @@ def get_prediction(dict):
 
     return {'prediction': int(y), 'probability': prob}
 
-
 @app.get("/")
 def hello_world():
     return {"hello" : "world"} 
@@ -35,14 +34,12 @@ def hello_world():
 class ModelParams(BaseModel):
     data: dict
 
-
 @app.post("/predict")
-def predict(params: BaseModel):
-
-    pred = get_prediction(params.data)
+def predict(params: ModelParams):
+    data = params.data
+    pred = get_prediction(data)
 
     return pred
-
 
 #################################################################################
 if __name__ == '__main__':
